@@ -1,7 +1,0 @@
-GitHub.io
-
-use for both school and play
-
-home page: whatever I want to show
-tabs: home, code, graphic, etc
-inside tabs: newest / featured thing, archive
