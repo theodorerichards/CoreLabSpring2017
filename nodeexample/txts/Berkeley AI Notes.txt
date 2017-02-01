@@ -1,0 +1,168 @@
+Berkeley AI Notes
+
+
+1. INTRODUCTION:
+
+Think Rationally NOT Think Like a Person
+Act Rationally NOT Act Like a Person
+
+Maximize Expected Utility
+
+Use data collection to improve ability
+-Release unfinished versions
+
+Nature doesn’t need to be mimicked - Birds flap wings but plane wings stay steady
+
+Keys to Decision Making:
+Memory
+Simulation of Future
+
+Probabilistic Reasoning > Ground Truth Values
+
+
+
+
+2. UNINFORMED SEARCH
+ 
+Reflex Agent:
+- Action based on current perception/memory
+- Does NOT consider future consequences of action
+-Only consider how the world IS
+
+Planning Agent:
+- Decisions based on hypothesized consequences of action
+- Must have model of how world evolves in response to action
+- Must formulate goal (test)
+-Considers how world WOULD BE
+
+Search Problem:
+- State Space - Each possible state of the world
+- Successor Function - Encodes dynamics of the world, incl. actions, consequences, and costs
+- Start State - Where agent starts/currently is
+- Goal Test - “Has goal been completed?”
+
+World State - Every detail of the environment
+
+State Space Graph - Mathematical representation of search problem where each state occurs only once - usually too big to actually build 
+
+Search Trees:
+- “What if” tree of plans and outcomes
+- Start state is the root node
+- Children correspond to successors
+- Nodes show states but correspond to PLANS that achieve those states
+- Usually can never actually build full tree
+
+Search Algorithm Properties:
+- Complete: Guaranteed to find solution if one exists?
+- Optimal: Guaranteed to find least cost path?
+- Time complexity?
+- Space complexity?
+
+Search Tree Properties:
+- b is branching factor
+- m is max depth
+- b^m is number of nodes at bottom of tree
+- 1 + b + b^2 + … b^m = O(b^m) is total number of nodes in tree
+
+Depth-First Search:
+- Strategy: Expand deepest node first
+- Implementation: Fringe is a LIFO stack
+
+	What nodes does DFS expand?
+	- Searches left to right
+	- Could process whole tree
+	- If m is finite, takes up to O(b^m) time
+	- If m is infinite, could take infinite time
+
+	How much space does fringe take?
+	- Only has siblings on path to root - O(bm)
+
+	Is it complete?
+	- m could be infinite, so only if cycles prevented
+
+	Is it optimal?
+	- No. Only finds leftmost solution, regardless of depth or cost
+
+Breadth-First Search:
+- Strategy: Expand a shallowest node first
+- Implementation: Fringe is a FIFO queue
+
+	What nodes does BFS expand?
+	- Processes all nodes above shallowest solution
+	- S is depth of shallowest solution
+	- Search takes O(b^s) time
+
+	How much space does the fringe take?
+	- Roughly the last tier - O(b^s)
+
+	Is it complete?
+	- Yes. S must be finite if solution exists
+
+	Is it optimal?
+	- If costs are all 1
+
+DFS vs BFS
+
+	When will BFS outperform DFS?
+	- When you care about number of actions to reach goal
+	- If there is a shallow solution, it will be quicker than DFS
+
+	When will DFS outperform BFS?
+	- If solutions are equally deep
+	- Won’t run out of memory, as BFS may with large trees
+
+
+Iterative Deepening
+- Idea: Combine DFS’s space advantage with BFS’s time/shallow-solution advantages
+	-Run DFS with depth of 1. If no solution…
+	-Run DFS with depth of 2. If no solution…
+	-Run DFS with depth of 3…
+- Redundant, but worth it
+
+Cost Sensitive Search:
+- BFS finds shortest path in terms of number of actions, but not the least-cost path
+
+Uniform Cost Search:
+- Strategy: expand a cheapest node first
+- Implementation: Fringe is a priority queue
+	- priority: cumulative cost
+- Similar to BFS except by isocontours of cost instead of layers
+
+	What nodes does UCS expand?
+	- Processes all nodes with cost less than cheapest solution
+	- If solution costs C^* and arcs cost at least ℇ, then the “effective depth” is roughly C^(*/ℇ)
+	-Takes O(b^(C^(*/ℇ))) time (exponential in effective depth)
+
+	How much space does the fringe take?
+	- Roughly the last tier - O(b^(C^(*/ℇ)))
+
+	Is it complete?
+	- Yes. Assuming best solution has a finite cost and minimum arc cost is positive
+
+	Is it optimal?
+	- Yes. It will only declare success when cheapest cost node achieves goal.
+
+	Issues:
+	- UCS explores increasing cost contours
+	- Good: UCS is complete and optimal
+	- Bad: 
+	     - Explores options in every “direction”
+	     - No info about goal location
+
+The One Queue: All search algorithms are same except for fringe strategies
+- Conceptually, all fringes are priority queues
+- Practically, for DFS and BFS, you can avoid log(n) overhead from an actual priority queue, by using stacks and queues
+- Can even code one implementation that takes a variable queuing object
+ 
+
+
+
+
+3. INFORMED SEARCH
+
+
+
+
+
+
+
