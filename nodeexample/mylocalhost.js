@@ -4,8 +4,12 @@ var http = require('http');
 //define port to listen to
 const PORT=8080;
 
+var num = 0;
+
 //function for handling request and response
 function handleRequest(request, response){
+  num ++;
+  console.log(num);
   response.end("The request has happened! Path hit: " + request.url);
 }
 

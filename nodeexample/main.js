@@ -1,2 +1,2 @@
 var txt = require('./txt');
-txt.world();
+console.log(txt.world); 

@@ -26,7 +26,7 @@ var y = 25;
 var z = 26;
 
 
-exports.world = function(){
-console.log("The sum of my name is " + (t+h+e+o)*(r+i+c+h+a+r+d+s));
-console.log("Random Number: " + Math.floor((Math.random() * 100) + 1));
+exports.world = function() {
+"The sum of my name is " + (t+h+e+o)*(r+i+c+h+a+r+d+s);
+"Random Number: " + Math.floor((Math.random() * 100) + 1);
 }
