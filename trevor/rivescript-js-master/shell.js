@@ -6,6 +6,41 @@
  * Usage: node shell.js /path/to/brain                                        *
  ******************************************************************************/
 
+ var app = require('express')();
+ var http = require('http').Server(app);
+ var io = require('socket.io')(http);
+
+ app.get('/', function(req, res){
+   res.sendfile('index.html');
+ });
+
+ io.on('connection', function(socket){
+   console.log('a user connected');
+   socket.on('disconnect', function(){
+     console.log('user disconnected');
+   });
+   socket.on('chat message', function(msg){
+    console.log('message: ' + msg);
+  });
+ });
+
+ io.on('connection', function(socket){
+   socket.on('chat message', function(msg){
+     io.emit('chat message', msg);
+   });
+ });
+
+ http.listen(3000, function(){
+   console.log('listening on *:3000');
+ });
+
+
+
+
+
+
+
+
 var readline = require("readline"),
 	fs = require("fs"),
 	RiveScript = require("./lib/rivescript");
@@ -22,7 +57,7 @@ var opts = {
 };
 
 process.argv.slice(2).forEach(function(val, index, array) {
-	
+
 	if (val === "--debug") {
 		opts.debug = true;
 	}
@@ -117,7 +152,7 @@ rl.on('line', function(cmd) {
 			: "ERR: Bot Not Ready Yet";
 		console.log("Bot>", reply);
 	}
-	
+
 	rl.prompt();
 }).on('close', function() {
 	console.log("");
@@ -142,5 +177,3 @@ function help() {
 	console.log("/log <code>  : Shortcut to /eval console.log(code).");
 	console.log("/quit        : Exit the program.");
 }
-
-

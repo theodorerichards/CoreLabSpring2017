@@ -1,0 +1,15 @@
+{
+  "name": "Talk_To_Trevor",
+  "version": "1.0.0",
+  "description": "Trevor Chatbot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Theodore Richards",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.10.2",
+    "socket.io": "^1.7.2"
+  }
+}
