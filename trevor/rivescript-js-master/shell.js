@@ -19,21 +19,38 @@
    socket.on('disconnect', function(){
      console.log('user disconnected');
    });
-   socket.on('chat message', function(msg){
-    console.log('message: ' + msg);
+   socket.on('chat message', function(cmd){
+    console.log(cmd);
   });
  });
 
  io.on('connection', function(socket){
-   socket.on('chat message', function(msg){
-     io.emit('chat message', msg);
+   socket.on('chat message', function(reply){
+     io.emit('chat message', reply);
    });
  });
 
  http.listen(3000, function(){
-   console.log('listening on *:3000');
+ //   console.log('listening on *:3000');
  });
 
+
+
+
+
+ // var http = require('http');
+ //
+ // // Configure our HTTP server to respond with Hello World to all requests.
+ // var server = http.createServer(function (request, response) {
+ //   response.writeHead(200, {"Content-Type": "text/plain"});
+ //   response.end("Hello World\n");
+ // });
+ //
+ // // Listen on port 8000, IP defaults to 127.0.0.1
+ // server.listen(8000);
+ //
+ // // Put a friendly message on the terminal
+ // console.log("Server running at http://127.0.0.1:8000/");
 
 
 
@@ -151,6 +168,8 @@ rl.on('line', function(cmd) {
 			? bot.reply("localuser", cmd)
 			: "ERR: Bot Not Ready Yet";
 		console.log("Bot>", reply);
+
+    io.emit('chat message', reply);
 	}
 
 	rl.prompt();

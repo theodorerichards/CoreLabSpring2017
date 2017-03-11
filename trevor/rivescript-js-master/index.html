@@ -4,36 +4,42 @@
     <title>Socket.IO chat</title>
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font: 20px Helvetica; background: #eaa57f;  color: white; }
-      form { background: none; padding: 3px; position: fixed; top: 40%; width: 100%; }
-      form input { border: 0; padding: 10px; width: 50%; margin-left: 11%; background: #f4d6c6; outline: 0; font: 20px Helvetica;}
-      form button { width: 14%; background: #c18463; border: none; padding: 10px; color: #f4d6c6;font: 20px Helvetica; cursor: pointer;}
-      #messages { list-style-type: none; margin: 0; padding: 0; position: absolute; top: 80%; width: 100%; -webkit-transform: scaleY(-1);}
-      #messages li { padding: 5px 10px; background: #c18463; transform: scaleY(-1);width: 64%; margin-left: 18%;}
-      #messages li:nth-child(odd) { background: #eaa57f; text-align: right; transform: scaleY(-1); width: 64%; margin-left: 18%;}
+      body { font: 30px Helvetica; background: #ffe574;  color: black; }
+      form { background: none; padding: 3px; position: fixed; bottom: 10%; width: 100%; }
+      div {list-style-type: none; margin: 0; padding: 0; position: absolute; bottom: 30%; top: 30%; width: 100%; }
+      form input { border: 0; padding: 10px; width: 50%; margin-left: 17%; background: #fffae3; outline: 0; font: 20px Helvetica;}
+      form button { width: 14%; background: #c18463; border: none; padding: 10px; color: #fffae3;font: 20px Helvetica; cursor: pointer;}
+      #messages { list-style-type: none; margin: 0; padding: 0; position: absolute; bottom: 30%; width: 100%; }
+      #messages li { padding: 5px 10px; background: #f7e6ad; width: 20%; margin-left: 20%; border-style: solid;}
+      #messages li:nth-child(odd) { background: #fffae3; text-align: right; width: 20%; margin-left: 60%; border-style: solid; }
     </style>
   </head>
   <body>
+
     <ul id="messages"></ul>
     <form action="">
-      <input id="m" autocomplete="off" /><button>Send That Ish</button>
-      <button onClick="javascript: window.open('https://www.google.com/#q=' + document.getElementById('m').value);">Google That Ish</button>
+      <input id="m" autocomplete="off" /><button>Submit</button>
     </form>
+
 
     <!-- <input type="button" id="btn" value="Google That Ish" onClick="javascript: window.open('https://www.google.com/#q=' + document.getElementById('m').value);" /> -->
     <script src="/socket.io/socket.io.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<div>
 <script>
   var socket = io();
+
   $('form').submit(function(){
-    socket.emit('chat message', $('#m').val());
+    socket.emit(cmd, $('#m').val());
     $('#m').val('');
     return false;
   });
-  socket.on('chat message', function(msg){
-    $('#messages').append($('<li>').text(msg));
+
+
+  socket.on('chat message', function(reply){
+    $('#messages').append($('<li>').text(reply));
   });
 </script>
-
+</div>
   </body>
 </html>

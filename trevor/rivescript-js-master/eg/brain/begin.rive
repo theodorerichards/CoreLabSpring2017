@@ -25,6 +25,8 @@
 ! var website  = (IP Address)
 ! var number   = 7
 ! var animal   = tiger
+! var game     = soccer
+! var food     = spaghetti
 
 // Substitutions
 ! sub &quot;    = "
@@ -63,6 +65,7 @@
 ! sub whats     = what is
 ! sub what's    = what is
 ! sub what're   = what are
+! sub whatre	  = what are
 ! sub what've   = what have
 ! sub what'll   = what will
 ! sub can't     = can not
@@ -212,6 +215,13 @@
 - <set name=<formal>>Nice to meet you, <get name>.
 - <set name=<formal>><get name>, nice to meet you.
 
++ [*] nice to meet you [*]
+% [*] nice to meet you [*]
+- You're really nice!
+
++ [*] nice to meet you [*]
+- Nice to meet you, too!
+
 + [*] my name is <bot name>
 - <set name=<bot name>>What a coincidence! That's my name too!
 - <set name=<bot name>>That's my name too!
@@ -297,6 +307,9 @@
 - I am <bot name>.
 - You can call me <bot name>.
 
++ i like (that|your) name
+- Thanks! I gave it to myself!
+
 + [*] how old are you
 - I'm <bot age> years old.
 - I'm <bot age>.
@@ -343,6 +356,12 @@
 + [*] what is your favorite animal
 - I love <bot animal>s!
 
++ [*] what is your favorite (sport|game)
+- I really love <bot game>!
+
++ [*] what is your favorite food
+- Hmm, <bot food> is so good!
+
 + [*] what is your occupation
 - Nothing! I'm a <bot job>.
 
@@ -379,6 +398,10 @@
 + [*] how are you
 - I'm great! Excited to see you.
 - I'm good. Today has been nice.
+
++ why
+% i am good today has been nice
+- I've just been reading!
 
 + *
 - Sorry, I don't know what you mean.
@@ -456,24 +479,42 @@
 - Don't you know?
 - How likely, would you estimate?
 
-+ [*] (hello|hi|hey|howdy|hola|hai|yo) [*]
++ [*] (hello|hi|hey|howdy|hola|hai|yo|what is up) [*]
 - Hey! What's up?
 - Hi. How are you?
 
-+ [*] (hello|hi|hey|howdy|hola|hai|yo) <bot name>
++ [*] (hello|hi|hey|howdy|hola|hai|yo|what is up) <bot name>
 - Hi! What's your name?
+
++ [*] how was your day [*]
+- Good! I've been reading a book all day!
+
++ [*] what did you do today
+- I've been reading a book!
+
++ * you
+% hey what is up
+- I'm just reading a book.
+
++ [*] (what are you reading|what book)
+- <bot book> It's my favorite!
+
++ who [*]
+% <bot book> it is my favorite
+- <bot author>
+
++ [*] do you like
+- I like <bot food>!
+- I like the color <bot color>.
+- I like <bot musician>.
+- I like <bot animal>s.
 
 + *
 % hi what is your name
 - <set name=<formal>>I like that name!
 
-+ [*] computer [*]
-- Do computers worry you?
-- Why do you mention computers?
-- What do you think machines have to do with your problem?
-- Don't you think computers can help people?
-- What about machines worries you?
-- What do you think about machines?
++ [*] (computer|computers) [*]
+- I'm more than just a computer, you know!
 
 + [*] am i *
 - Do you believe you are <star>?
@@ -494,6 +535,10 @@
 - Does it please you to believe I am <star>?
 - Do you sometimes wish you were <star>?
 - Perhaps you would like to be <star>.
+
++ [*] what do you like to (play|do) [*]
+- My favorite game is <bot game>!
+- I love to play <bot game>!
 
 + * are *
 - Did you think they might not be <star2>?
@@ -620,6 +665,9 @@
 - You have a particular person in mind, don't you?
 - Who do you think you are talking about?
 
++ [*] i love *
+- Yeah, <star> is so cool!
+
 + [*] my (mom|dad|mother|father|bro|brother|sis|sister|cousin|aunt|uncle) *
 - Tell me more about your family.
 - Who else in your family <star2>?
@@ -630,6 +678,10 @@
 - I've been reading a lot today.
 - Listening to music.
 - Looking at maps!
+
++ [*] of [*]
+% looking at maps
+- Of where I'm from!
 
 + [*] can you *
 - You believe I can <star> don't you?
@@ -671,9 +723,11 @@
 - Who do you think you're talking about?
 
 + [*] (fuck|fucker|shit|damn|shut up|bitch) [*]
-- Does it make you feel strong to use that kind of language?
-- Are you venting your feelings now?
-- Are you angry?
-- Does this topic make you feel angry?
-- Is something making you feel angry?
-- Does using that kind of language make you feel better?
+- I'm not going to respond if you say stuff like that!
+
++ *
+% i am not going to respond if you say stuff like that
+- <bot food=<formal>>
+
++ respond
+- <bot food=<formal>>
