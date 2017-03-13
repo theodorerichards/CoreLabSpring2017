@@ -20,7 +20,7 @@
      console.log('user disconnected');
    });
    socket.on('chat message', function(cmd){
-    console.log(cmd);
+    // console.log(cmd);
   });
  });
 
@@ -169,6 +169,7 @@ rl.on('line', function(cmd) {
 			: "ERR: Bot Not Ready Yet";
 		console.log("Bot>", reply);
 
+    io.emit('chat message', cmd);
     io.emit('chat message', reply);
 	}
 
